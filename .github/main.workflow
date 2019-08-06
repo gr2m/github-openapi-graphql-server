@@ -66,8 +66,8 @@ action "npm ci (release)" {
 
 action "semantic-release" {
   uses    = "docker://timbru31/node-alpine-git"
-  runs    = "npm"
-  args    = "run semantic-release"
+  runs    = "npx"
+  args    = "semantic-release"
 
   needs   = [
     "master branch only",
