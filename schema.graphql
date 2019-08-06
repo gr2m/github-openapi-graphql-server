@@ -1,0 +1,61 @@
+type Query {
+  endpoints(version: String): [Endpoint]!
+  releases: [Release]!
+  lastRelease: Release!
+}
+
+type Release {
+  version: String!
+  createdAt: String!
+  description: String!
+}
+
+type Endpoint {
+  id: String!
+  scope: String!
+  name: String!
+  description: String!
+  method: String!
+  url: String!
+  deprecated: String!
+  documentationUrl: String!
+  isLegacy: Boolean
+  isEnabledForApps: Boolean
+  isGithubCloudOnly: Boolean
+
+  parameters: [Parameters]
+  changes: [Change]
+}
+
+type Parameters {
+  name: String!
+  type: String!
+  description: String!
+  location: ParameterLocation!
+  required: Boolean!
+  allowNull: Boolean!
+  enum: [String]
+  validation: String
+  mapToData: Boolean
+}
+
+type Change {
+  type: ChangeType
+  date: String!
+  note: String!
+  before: String
+  after: String
+}
+
+enum ParameterLocation {
+  URL
+  HEADER
+  QUERY
+  BODY
+}
+
+enum ChangeType {
+  ID
+  PARAMETER
+  DEPRECATION
+}
