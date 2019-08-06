@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "alias": ["octokit-routes-graphql-server.now.sh"],
+  "public": true,
+  "env": {
+    "NODE_ENV": "production",
+    "GITHUB_TOKEN": "@token"
+  }
+}
