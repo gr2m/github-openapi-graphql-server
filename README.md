@@ -48,4 +48,4 @@ The latest release can be retrieved, too
 
 ## License
 
-[MIT]
+[MIT](LICENSE)
