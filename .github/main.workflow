@@ -6,6 +6,14 @@ workflow "Deploy on push" {
   ]
 }
 
+workflow "Release" {
+  on       = "push"
+
+  resolves = [
+    "semantic-release"
+  ]
+}
+
 action "master branch only" {
   uses = "actions/bin/filter@master"
   args = "branch master"
@@ -46,5 +54,27 @@ action "remove older deployments" {
 
   secrets = [
     "ZEIT_TOKEN"
+  ]
+}
+
+action "npm ci (release)" {
+  needs = "master branch only"
+  uses  = "docker://timbru31/node-alpine-git"
+  runs  = "npm"
+  args  = "ci"
+}
+
+action "semantic-release" {
+  uses    = "docker://timbru31/node-alpine-git"
+  runs    = "npm"
+  args    = "run semantic-release"
+
+  needs   = [
+    "master branch only",
+    "npm ci (release)"
+  ]
+
+  secrets = [
+    "GITHUB_TOKEN"
   ]
 }
