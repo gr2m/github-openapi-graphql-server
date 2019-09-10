@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@gr2m/json-schema-ref-parser": "^7.1.0-pr-133-d1d1623",
     "@octokit/graphql": "^3.0.1",
+    "got": "^9.6.0",
     "graphql-yoga": "^1.18.1",
     "semver": "^6.3.0"
   },
