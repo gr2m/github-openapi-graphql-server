@@ -1,5 +1,5 @@
 type Query {
-  endpoints(version: String): [Endpoint]!
+  endpoints(version: String, filter: Filter): [Endpoint]!
   endpoint(route: String, version: String): Endpoint
   releases: [Release]!
   lastRelease: Release!
@@ -11,21 +11,37 @@ type Release {
   description: String!
 }
 
+input Filter {
+  isLegacy: Boolean
+  isDeprecated: Boolean
+  isEnabledForApps: Boolean
+  isGithubCloudOnly: Boolean
+}
+
 type Endpoint {
-  id: String!
-  scope: String!
+  id(format: StringFormat): String!
+  scope(format: StringFormat): String!
   name: String!
   description: String!
   method: String!
   url: String!
-  deprecated: String!
   documentationUrl: String!
+
+  parameters: [Parameters]
+
+  isDeprecated: Boolean
   isLegacy: Boolean
   isEnabledForApps: Boolean
   isGithubCloudOnly: Boolean
-
-  parameters: [Parameters]
+  renamed: Rename
   changes: [Change]
+}
+
+type Rename {
+  before(format: StringFormat): String
+  after(format: StringFormat): String
+  date: String
+  note: String
 }
 
 type Parameters {
@@ -59,4 +75,12 @@ enum ChangeType {
   ID
   PARAMETER
   DEPRECATION
+}
+
+enum StringFormat {
+  # parts separated by dashes
+  KEBABCASE
+
+  # parts separated by camelizing first letter of each word except the first
+  CAMELCASE
 }
