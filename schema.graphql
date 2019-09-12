@@ -1,5 +1,5 @@
 type Query {
-  endpoints(version: String, filter: Filter): [Endpoint]!
+  endpoints(version: String, filter: Filter, limit: Int): [Endpoint]!
   endpoint(route: String, version: String): Endpoint
   releases: [Release]!
   lastRelease: Release!
@@ -27,7 +27,9 @@ type Endpoint {
   url: String!
   documentationUrl: String!
 
-  parameters: [Parameters]
+  parameters: [Parameter]!
+  headers: [Header]
+  previews(required: Boolean): [Preview]!
 
   isDeprecated: Boolean
   isLegacy: Boolean
@@ -37,6 +39,18 @@ type Endpoint {
   changes: [Change]
 }
 
+type Header {
+  name: String!
+  description: String!
+  value: String!
+}
+
+type Preview {
+  name: String!
+  note: String!
+  required: Boolean!
+}
+
 type Rename {
   before(format: StringFormat): String
   after(format: StringFormat): String
@@ -44,13 +58,16 @@ type Rename {
   note: String
 }
 
-type Parameters {
+type Parameter {
   name: String!
-  type: String!
-  description: String!
-  location: ParameterLocation!
-  required: Boolean!
-  allowNull: Boolean!
+  deprecated: Boolean
+  alias: String
+  # if Parameter is deprecated, the properties below are not returned
+  type: String
+  description: String
+  location: ParameterLocation
+  required: Boolean
+  allowNull: Boolean
   enum: [String]
   validation: String
   mapToData: Boolean

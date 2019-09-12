@@ -28,12 +28,24 @@ async function main({ token }) {
       }
     },
     Endpoint: {
-      id: formatStringResolver.bind(null, 'id'),
-      scope: formatStringResolver.bind(null, 'scope')
+      id: formatStringResolver.bind(null, "id"),
+      scope: formatStringResolver.bind(null, "scope"),
+      previews: (endpoint, { required }) => {
+        // compatibility with routes < 23.1.1
+        if (!endpoint.previews) {
+          return [];
+        }
+
+        if (!required) {
+          return endpoint.previews;
+        }
+
+        return endpoint.previews.filter(preview => preview.required);
+      }
     },
     Rename: {
-      before: formatStringResolver.bind(null, 'before'), 
-      after: formatStringResolver.bind(null, 'after')
+      before: formatStringResolver.bind(null, "before"),
+      after: formatStringResolver.bind(null, "after")
     }
   };
 
