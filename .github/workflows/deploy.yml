@@ -9,9 +9,5 @@ jobs:
         uses: actions/zeit-now@master
         env:
           ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
-      - name: alias
-        uses: actions/zeit-now@master
-        env:
-          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
         with:
-          args: alias
+          args: --target production
