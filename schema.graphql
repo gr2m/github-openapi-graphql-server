@@ -1,5 +1,10 @@
 type Query {
-  endpoints(version: String, filter: Filter, limit: Int): [Endpoint]!
+  endpoints(
+    version: String
+    filter: Filter
+    limit: Int
+    route: String
+  ): [Endpoint]!
   endpoint(route: String, version: String): Endpoint
   releases: [Release]!
   lastRelease: Release!
@@ -36,7 +41,7 @@ type Endpoint {
   isEnabledForApps: Boolean
   isGithubCloudOnly: Boolean
   renamed: Rename
-  changes: [Change]
+  changes(type: ChangeType): [Change]
 }
 
 type Header {
@@ -62,36 +67,49 @@ type Parameter {
   name: String!
   deprecated: Boolean
   alias: String
+
   # if Parameter is deprecated, the properties below are not returned
   type: String
   description: String
-  location: ParameterLocation
+  in: ParameterLocation
   required: Boolean
   allowNull: Boolean
   enum: [String]
   validation: String
   mapToData: Boolean
+  default: String
 }
 
 type Change {
   type: ChangeType
   date: String!
   note: String!
-  before: String
-  after: String
+  before: BeforeAfterChange
+  after: BeforeAfterChange
+}
+
+type BeforeAfterChange {
+  description: String
+
+  # Operation change only
+  operationId: String
+
+  # Parameter change only
+  name: String
+  type: String
+  in: ParameterLocation
 }
 
 enum ParameterLocation {
-  URL
+  PATH
   HEADER
   QUERY
   BODY
 }
 
 enum ChangeType {
-  ID
+  OPERATION
   PARAMETER
-  DEPRECATION
 }
 
 enum StringFormat {

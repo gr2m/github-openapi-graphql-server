@@ -41,6 +41,13 @@ async function main({ token }) {
         }
 
         return endpoint.previews.filter(preview => preview.required);
+      },
+      changes: (endpoint, { type }) => {
+        if (!type) {
+          return endpoint.changes;
+        }
+
+        return endpoint.changes.filter(change => change.type === type);
       }
     },
     Rename: {
