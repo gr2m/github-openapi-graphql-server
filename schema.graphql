@@ -41,7 +41,37 @@ type Endpoint {
   isEnabledForApps: Boolean
   isGithubCloudOnly: Boolean
   renamed: Rename
+  responses(code: ResponseCode): [Response]
   changes(type: ChangeType): [Change]
+}
+
+enum ResponseCode {
+  CODE_2xx
+  CODE_4xx
+  CODE_200
+  CODE_204
+  CODE_201
+  CODE_418
+  CODE_205
+  CODE_404
+  CODE_302
+  CODE_422
+  CODE_403
+  CODE_202
+  CODE_409
+  CODE_405
+}
+
+type Response {
+  code: Int!
+  description: String!
+  schema: String
+  examples: [Example]
+}
+
+type Example {
+  name: String
+  data: String
 }
 
 type Header {
