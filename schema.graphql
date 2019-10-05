@@ -40,6 +40,7 @@ type Endpoint {
   isLegacy: Boolean
   isEnabledForApps: Boolean
   isGithubCloudOnly: Boolean
+  triggersNotification: Boolean
   renamed: Rename
   responses(code: ResponseCode): [Response]
   changes(type: ChangeType): [Change]
