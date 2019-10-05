@@ -1,6 +1,7 @@
 type Query {
   endpoints(
     version: String
+    ghe: GitHubEnterpriseVersion
     filter: Filter
     limit: Int
     route: String
@@ -44,6 +45,14 @@ type Endpoint {
   renamed: Rename
   responses(code: ResponseCode): [Response]
   changes(type: ChangeType): [Change]
+}
+
+enum GitHubEnterpriseVersion {
+  GHE_215
+  GHE_216
+  GHE_217
+  GHE_218
+  GHE_219
 }
 
 enum ResponseCode {
