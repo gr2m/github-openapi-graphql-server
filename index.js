@@ -50,9 +50,9 @@ async function main({ token }) {
         return endpoint.changes.filter(change => change.type === type);
       }
     },
-    Rename: {
-      before: formatStringResolver.bind(null, "before"),
-      after: formatStringResolver.bind(null, "after")
+    ScopeAndId: {
+      scope: formatStringResolver.bind(null, "scope"),
+      id: formatStringResolver.bind(null, "id")
     }
   };
 

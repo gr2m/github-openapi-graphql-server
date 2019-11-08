@@ -97,10 +97,15 @@ type Preview {
 }
 
 type Rename {
-  before(format: StringFormat): String
-  after(format: StringFormat): String
+  before(format: StringFormat): ScopeAndId
+  after(format: StringFormat): ScopeAndId
   date: String
   note: String
+}
+
+type ScopeAndId {
+  id(format: StringFormat): String
+  scope(format: StringFormat): String
 }
 
 type Parameter {
