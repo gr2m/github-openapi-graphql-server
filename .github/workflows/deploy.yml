@@ -1,5 +1,9 @@
 name: Deploy on Now
-on: [push]
+on: 
+  push:
+    branches: master
+  repository_dispatch:
+    types: [octokit-routes-release]
 jobs:
   deploy:
     runs-on: ubuntu-latest
