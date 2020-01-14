@@ -4,6 +4,6 @@
   "public": true,
   "env": {
     "NODE_ENV": "production",
-    "GITHUB_TOKEN": "@token"
+    "GITHUB_TOKEN": "@github-token"
   }
 }
