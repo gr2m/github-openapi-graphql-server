@@ -5,6 +5,7 @@ type Query {
     filter: Filter
     limit: Int
     route: String
+    ignoreChangesBefore: String
   ): [Endpoint]!
   endpoint(route: String, version: String): Endpoint
   releases: [Release]!
