@@ -87,7 +87,8 @@ type Example {
 type Header {
   name: String!
   description: String!
-  value: String!
+  value: String
+  required: Boolean!
 }
 
 type Preview {
