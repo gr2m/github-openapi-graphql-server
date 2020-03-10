@@ -16,8 +16,7 @@
     "semver": "^6.3.0"
   },
   "devDependencies": {
-    "semantic-release": "^15.13.24",
-    "now": "16.7.3"
+    "semantic-release": "^15.13.24"
   },
   "release": {
     "prepare": [],
