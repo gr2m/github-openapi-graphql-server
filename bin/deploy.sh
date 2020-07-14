@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-now="npx now@16 --debug --token=$ZEIT_TOKEN"
+now="npx --ignore-existing now@16 --debug --token=$ZEIT_TOKEN"
 
 echo "$ now rm --safe --yes octokit-routes-graphql-server"
 $now rm --safe --yes octokit-routes-graphql-server || true
