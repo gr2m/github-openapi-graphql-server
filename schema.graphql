@@ -19,7 +19,6 @@ type Release {
 }
 
 input Filter {
-  isLegacy: Boolean
   isDeprecated: Boolean
   isEnabledForApps: Boolean
   isGithubCloudOnly: Boolean
@@ -39,7 +38,8 @@ type Endpoint {
   previews(required: Boolean): [Preview]!
 
   isDeprecated: Boolean
-  isLegacy: Boolean
+  deprecationDate: String
+  removalDate: String
   isEnabledForApps: Boolean
   isGithubCloudOnly: Boolean
   triggersNotification: Boolean
