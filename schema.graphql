@@ -15,7 +15,6 @@ type Query {
 type Release {
   version: String!
   createdAt: String!
-  description: String!
 }
 
 input Filter {
