@@ -18,7 +18,7 @@
   "repository": "https://github.com/gr2m/github-openapi-graphql-server",
   "dependencies": {
     "apollo-server-micro": "^2.15.1",
-    "got": "^9.6.0",
+    "got": "^11.5.0",
     "graphql": "^15.3.0",
     "semver": "^6.3.0"
   },
