@@ -1,6 +1,6 @@
 {
   "name": "github-openapi-graphql-server",
-  "private": "true",
+  "private": true,
   "version": "1.0.0",
   "description": "GraphQL server for GitHub's REST API specifications",
   "scripts": {
