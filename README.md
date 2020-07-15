@@ -1,4 +1,4 @@
-# Octokit Routes GraphQL Server
+# GitHub OpenAPI GraphQL Server
 
 > Send GraphQL queries against the OpenAPI specification of GitHub's REST API
 
