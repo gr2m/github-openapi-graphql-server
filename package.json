@@ -1,30 +1,30 @@
 {
-  "name": "octokit-routes-graphql-server",
+  "name": "github-openapi-graphql-server",
+  "private": "true",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "GraphQL server for GitHub's REST API specifications",
   "scripts": {
-    "start": "node bin/server.js"
+    "start": "vercel dev",
+    "build": "node scripts/build-graphql-schema.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "graphql",
+    "openapi",
+    "rest",
+    "github"
+  ],
+  "author": "Gregor Martynus (https://twitter.com/gr2m)",
+  "license": "MIT",
+  "repository": "https://github.com/gr2m/github-openapi-graphql-server",
   "dependencies": {
-    "@octokit/graphql": "^3.0.1",
+    "apollo-server-micro": "^2.15.1",
     "got": "^9.6.0",
-    "graphql-yoga": "^1.18.1",
+    "graphql": "^15.3.0",
     "semver": "^6.3.0"
   },
   "devDependencies": {
-    "semantic-release": "^15.13.24"
-  },
-  "release": {
-    "prepare": [],
-    "verifyConditions": [
-      "@semantic-release/github"
-    ],
-    "publish": [
-      "@semantic-release/github"
-    ]
+    "@vercel/node": "^1.7.2",
+    "semantic-release": "^17.1.1",
+    "vercel": "^19.1.2"
   }
 }
