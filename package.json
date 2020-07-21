@@ -5,6 +5,7 @@
   "description": "GraphQL server for GitHub's REST API specifications",
   "scripts": {
     "start": "vercel dev",
+    "test": "ava",
     "build": "node scripts/build-graphql-schema.js"
   },
   "keywords": [
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@vercel/node": "^1.7.2",
+    "ava": "^3.10.1",
     "deep-equal": "^2.0.3",
     "semantic-release": "^17.1.1",
     "vercel": "^19.1.2"

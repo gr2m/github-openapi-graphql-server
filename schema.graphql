@@ -7,7 +7,11 @@ type Query {
     route: String
     ignoreChangesBefore: String
   ): [Endpoint]!
-  endpoint(route: String, version: String): Endpoint
+  endpoint(
+    route: String
+    version: String
+    ghe: GitHubEnterpriseVersion
+  ): Endpoint
   releases: [Release]!
   lastRelease: Release!
 }

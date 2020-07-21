@@ -23,6 +23,7 @@ module.exports = async (req, res) => {
   }
 
   const url = `https://unpkg.com/@github/openapi@${version}/dist/${toJsonFileName(
+    version,
     req.query.ghe
   )}`;
   console.log(`downloading ${url}`);
@@ -34,8 +35,11 @@ module.exports = async (req, res) => {
   res.json(endpoints);
 };
 
-function toJsonFileName(ghe) {
-  if (!ghe) return "api.github.com-deref.json";
+function toJsonFileName(version, ghe) {
+  const prefix = parseInt(version, 10) > 4 ? "deref/" : "";
+  const suffix = parseInt(version, 10) > 4 ? "" : "-deref";
 
-  return ghe.replace(/^GHE_(\d)(\d+)/, "ghe-$1.$2-deref.json");
+  if (!ghe) return `${prefix}api.github.com${suffix}.json`;
+
+  return ghe.replace(/^GHE_(\d)(\d+)/, `${prefix}ghe-$1.$2${suffix}.json`);
 }

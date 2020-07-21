@@ -1,0 +1,54 @@
+name: Test
+on: [deployment_status]
+
+# This action does not set a commit/pull reques status automatically, because it
+# is not triggered by the `push` event. Instead it uses the `octokit/request-action`
+# action to set a commit status manually.
+
+# When Vercel starts a deployment, it creates a deployment event with state=pending.
+# The first job "vercel-deployment-pending" creates a pending status in this case
+#
+# When Vercel deployment completed successfully, the tests are run against the
+# deployments URL. Once completed, a commit status is created based on outcome of tests.
+
+jobs:
+  vercel-deployment-pending:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.deployment_status.state == 'pending' }}
+    steps:
+      - name: Create pending status
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/statuses/:sha
+          repository: ${{ github.repository }}
+          sha: ${{ github.sha }}
+          context: test
+          description: waiting for deployment
+          state: pending
+          target_url: ${{ github.event.deployment_status.target_url }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  vercel-deployment:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.deployment_status.state == 'success' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - run: npm ci
+      - run: npm test
+        id: test
+        env:
+          VERCEL_URL: ${{ github.event.deployment_status.target_url }}
+      - name: Create commit status
+        if: ${{ always() }}
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/statuses/:sha
+          repository: ${{ github.repository }}
+          sha: ${{ github.sha }}
+          context: test
+          description: done
+          state: ${{ steps.test.outcome}}
+          target_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
