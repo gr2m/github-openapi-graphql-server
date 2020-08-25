@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@vercel/node": "^1.7.4",
-    "ava": "^3.12.0",
+    "ava": "^3.12.1",
     "deep-equal": "^2.0.3",
     "semantic-release": "^17.1.1",
     "vercel": "^19.2.0"
