@@ -1,7 +1,7 @@
 const test = require("ava");
 const got = require("got");
 
-const VERCEL_URL = process.env.VERCEL_URL || "http://localhost:3000";
+const VERCEL_URL = require("../lib/get-vercel-url")();
 
 const graphql = got.extend({
   prefixUrl: `${VERCEL_URL}/api/`,
