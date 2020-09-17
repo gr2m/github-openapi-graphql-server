@@ -56,8 +56,8 @@ const workaroundRoutes = [
 
 for (const route of workaroundRoutes) {
   test(`"${route}" should return "isGithubCloudOnly: true"`, async (t) => {
-    const query = `query ($version: String!, $route: String!) {
-      endpoint(version: $version, route: $route) {
+    const query = `query ($route: String!) {
+      endpoint(version: "0.0.6", route: $route) {
         isGithubCloudOnly
       }
     }
@@ -67,7 +67,6 @@ for (const route of workaroundRoutes) {
       json: {
         query,
         variables: {
-          version: "0.0.6",
           route,
         },
       },
