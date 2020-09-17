@@ -67,7 +67,7 @@ for (const route of workaroundRoutes) {
       json: {
         query,
         variables: {
-          version: "5.6.1",
+          version: "0.0.6",
           route,
         },
       },
