@@ -20,7 +20,7 @@
   "dependencies": {
     "apollo-server-micro": "^2.18.2",
     "got": "^11.8.0",
-    "graphql": "^15.3.0",
+    "graphql": "^15.4.0",
     "semver": "^7.3.2"
   },
   "devDependencies": {
