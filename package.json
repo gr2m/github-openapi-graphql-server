@@ -27,7 +27,7 @@
     "@vercel/node": "^1.8.5",
     "ava": "^3.13.0",
     "deep-equal": "^2.0.4",
-    "semantic-release": "^17.2.3",
+    "semantic-release": "^17.2.4",
     "vercel": "^20.1.4"
   }
 }
