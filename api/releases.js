@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
         };
       })
       .filter((release) => semver.valid(release.version))
-      .sort((a, b) => semver.compare(a.version, b.version));
+      .sort((a, b) => semver.compare(b.version, a.version));
 
     res.setHeader("cache-control", "s-maxage=180");
     res.json(versions);
