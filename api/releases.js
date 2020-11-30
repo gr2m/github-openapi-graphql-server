@@ -2,7 +2,7 @@ const got = require("got");
 const semver = require("semver");
 
 /**
- * Loads releases from https://github.com/github/rest-api-descriptions
+ * Loads releases from https://github.com/octokit/openapi
  *
  * Setting a `GITHUB_TOKEN` environment variable should not be necessary for local testing,
  * but the servers on Vercel are likely blocked from sending unauthorized requests.
@@ -13,7 +13,7 @@ const semver = require("semver");
 module.exports = async (req, res) => {
   try {
     const { body } = await got(
-      "https://api.github.com/repos/github/rest-api-description/releases?per_page=100",
+      "https://api.github.com/repos/octokit/openapi/releases?per_page=100",
       {
         headers: process.env.GITHUB_TOKEN
           ? {

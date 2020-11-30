@@ -22,8 +22,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // const url = `https://unpkg.com/@github/openapi@${version}/dist/${toJsonFileName(
-  const url = toFileUrl(version, req.query.ghe);
+  const url = toJsonFileUrl(version, req.query.ghe);
   console.log(`downloading ${url}`);
   const { body } = await got(url);
 
@@ -33,14 +32,9 @@ module.exports = async (req, res) => {
   res.json(endpoints);
 };
 
-const BASE_URL =
-  "https://raw.githubusercontent.com/github/rest-api-description/main/descriptions";
-function toFileUrl(version, ghe) {
-  if (!ghe) {
-    return `${BASE_URL}/api.github.com/dereferenced/api.github.com.deref.json`;
-  }
+function toJsonFileUrl(version, ghe) {
+  const baseUrl = `https://unpkg.com/@octokit/openapi@${version}/generated`;
+  if (!ghe) return `${baseUrl}/api.github.com.deref.json`;
 
-  const [, mainVersion, subVersion] = ghe.match(/^GHE_(\d)(\d+)/);
-
-  return `${BASE_URL}/ghes-${mainVersion}.${subversion}/dereferenced/ghes-${mainVersion}.${subversion}.deref.json`;
+  return baseUrl + ghe.replace(/^GHE_(\d)(\d+)/, `/ghes-$1.$2$.deref.json`);
 }
