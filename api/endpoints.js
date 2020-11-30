@@ -10,26 +10,33 @@ const schemaToEndpoints = require("../lib/schema-to-endpoints");
  * @param {import("@vercel/node").NowResponse} res
  */
 module.exports = async (req, res) => {
-  const releases = await getReleases();
-  const version = req.query.version || releases[0].version;
+  try {
+    const releases = await getReleases();
+    const version = req.query.version || releases[0].version;
 
-  const knownVersions = releases.map((release) => release.version).join(",");
-  if (!knownVersions.includes(version)) {
-    res.status(404);
-    res.json({
-      error: `Version "${version}" could not be found. Knonw versions are: ${knownVersions}`,
-    });
-    return;
+    const knownVersions = releases.map((release) => release.version).join(",");
+    if (!knownVersions.includes(version)) {
+      res.status(404);
+      res.json({
+        error: `Version "${version}" could not be found. Knonw versions are: ${knownVersions}`,
+      });
+      return;
+    }
+
+    const url = toJsonFileUrl(version, req.query.ghe);
+    console.log(`downloading ${url}`);
+    const { body } = await got(url);
+
+    const endpoints = schemaToEndpoints(JSON.parse(body));
+
+    res.setHeader("cache-control", "s-maxage=31536000");
+    res.json(endpoints);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500);
+    res.json({ error });
   }
-
-  const url = toJsonFileUrl(version, req.query.ghe);
-  console.log(`downloading ${url}`);
-  const { body } = await got(url);
-
-  const endpoints = schemaToEndpoints(JSON.parse(body));
-
-  res.setHeader("cache-control", "s-maxage=31536000");
-  res.json(endpoints);
 };
 
 function toJsonFileUrl(version, ghe) {
