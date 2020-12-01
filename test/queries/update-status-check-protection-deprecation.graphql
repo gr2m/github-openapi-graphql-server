@@ -2,7 +2,7 @@
 # repos/updateStatusCheckProtection
 {
   endpoint(
-    version: "0.0.6"
+    version: "1.0.5"
     route: "PATCH /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks"
   ) {
     changes {

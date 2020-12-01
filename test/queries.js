@@ -30,7 +30,7 @@ for (const filename of readdirSync("test/queries")) {
       json: {
         query,
         variables: {
-          version: "0.0.6",
+          version: "1.0.5",
         },
       },
     });

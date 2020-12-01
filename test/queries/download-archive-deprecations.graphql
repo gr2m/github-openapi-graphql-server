@@ -1,12 +1,12 @@
 {
   tarballEndpoint: endpoint(
-    version: "0.0.6"
+    version: "1.0.5"
     route: "GET /repos/{owner}/{repo}/tarball/{ref}"
   ) {
     ...properties
   }
   zipballEndpoint: endpoint(
-    version: "0.0.6"
+    version: "1.0.5"
     route: "GET /repos/{owner}/{repo}/zipball/{ref}"
   ) {
     ...properties

@@ -33,7 +33,7 @@
 # "PATCH /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}",
 
 {
-  endpoint(version: "0.0.6", route: "GET /orgs/{org}/actions/runner-groups") {
+  endpoint(version: "1.0.5", route: "GET /orgs/{org}/actions/runner-groups") {
     isGithubCloudOnly
   }
 }
