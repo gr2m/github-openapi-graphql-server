@@ -1,4 +1,5 @@
 const { ApolloServer } = require("apollo-server-micro");
+const semver = require("semver");
 
 const getEndpoints = require("../lib/get-endpoints");
 const getEndpoint = require("../lib/get-endpoint");
@@ -13,8 +14,11 @@ const resolvers = {
     endpoint: async (_, options) => getEndpoint(options),
     releases: async () => getReleases(),
     lastRelease: async () => {
-      const [release] = await getReleases();
-      return release;
+      const releases = await getReleases();
+      const sortedReleases = releases.sort((a, b) =>
+        semver.compare(a.version, b.version)
+      );
+      return sortedReleases.pop();
     },
   },
   Endpoint: {

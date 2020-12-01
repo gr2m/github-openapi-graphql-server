@@ -52,9 +52,6 @@ type Endpoint {
 }
 
 enum GitHubEnterpriseVersion {
-  GHE_215
-  GHE_216
-  GHE_217
   GHE_218
   GHE_219
   GHE_220
@@ -122,10 +119,9 @@ type Parameter {
   name: String!
   deprecated: Boolean
   alias: String
-
-  # if Parameter is deprecated, the properties below are not returned
-  type: String
   description: String
+
+  type: String
   in: ParameterLocation
   required: Boolean
   allowNull: Boolean
@@ -138,7 +134,8 @@ type Parameter {
 type Change {
   type: ChangeType
   date: String!
-  note: String!
+  note: String
+  parameter: String
   before: BeforeAfterChange
   after: BeforeAfterChange
 }
@@ -153,6 +150,11 @@ type BeforeAfterChange {
   name: String
   type: String
   in: ParameterLocation
+  allowNull: Boolean
+  enum: [String]
+  validation: String
+  mapToData: Boolean
+  default: String
 }
 
 enum ParameterLocation {
